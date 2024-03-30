@@ -1,3 +1,15 @@
+# Idea folder
+.idea
+
+# Image names
+images/*
+
+# local debug.log
+debug.log
+
+# vscode stuffs
+.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
