@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container px-4 py-1" id="home_page">
+    <!-- <h2 class="pb-2">Tradepally Debts-Credits API Usage</h2> -->
+    <p class="p-2 content-section bg-light">
+        This webpage illustrates minimal usage of a Debt & Credit Recording module which is part of a larger
+        bookkeeping app, <a href="https://Tradepally.com/" class="text-decoration-none"><em>Tradepally</em></a>. The
+        module is used to keep simple but detailed and dynamic record of debtors and creditors for individual, business
+        or organisation, and I recently exposed the module for use in another project via an API. The complete code for
+        this project is on <a href="https://github.com/traderstechie/DebtsCredits" class="text-decoration-none"><em>This
+                GitHub Repo</em></a>
+    </p>
+    <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
+        <div class="col d-flex align-items-start">
+            <!-- <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em">
+                    <use xlink:href="#toggles2" />
+                </svg>
+            </div> -->
+            <div class="content-section bg-secondary text-white container-fluid">
+                <h3>Featured Profile</h3>
+                <table class="table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set curr = dcp_data[lcl.primary_currency_d] %}
+                        {% set r_c = dcp_data[lcl.payables_and_receivables_d] %}
+                        <tr>
+                            <td>Name</td>
+                            <td><strong>{{ dcp_data[lcl.name] }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>ID</td>
+                            <td><strong>{{ dcp_data[lcl.id] }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Currency</td>
+                            <td><strong>{{ curr[lcl.name] }} ({{ curr[lcl.symbol] }})</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Created On</td>
+                            <td><strong>{{ datetime.fromisoformat(dcp_data[lcl.created_on]).strftime('%a, %d-%b-%Y')
+                                    }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Created Via</td>
+                            <td><strong>{{ dcp_data[lcl.created_via] }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Debtors</td>
+                            <td><strong>{{ dcp_data[lcl.num_of_debtors] }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Creditors</td>
+                            <td><strong>{{ dcp_data[lcl.num_of_creditors] }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Payable</td>
+                            <td><strong>{{ utils.two_decimals(r_c[lcl.total_payables]) }}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Receivable</td>
+                            <td><strong>{{ utils.two_decimals(r_c[lcl.total_receivables]) }}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <a href="#" class="btn btn-black">
+                    Primary button
+                </a> -->
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+            <!-- <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em">
+                    <use xlink:href="#cpu-fill" />
+                </svg>
+            </div> -->
+            <div class="content-section bg-secondary text-white container-fluid">
+                <h3>Debtors & Creditors</h3>
+                <p class="border-bottom">
+                    Debtors and creditors listed here, were created by visitors like yourself to test the application.
+                    You can create one below or proceed to <strong>Transactions</strong> to create a new transaction for
+                    any debtor/creditor shown
+                </p>
+                <div class="container text-center">
+                    <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
+                        data-target="#debtorsList">Debtors</a>
+                    <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
+                        data-target="#creditorsList">Creditors</a>
+                    <hr>
+                    <div class="content-section moreOptionContent" hidden id="debtorsList">
+                        <p class="text-dark">Full list of Debtors</p>
+                    </div>
+                    <div class="content-section moreOptionContent" hidden id="creditorsList">
+                        <p class="text-dark">Full list of Creditors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+            <!-- <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em">
+                    <use xlink:href="#tools" />
+                </svg>
+            </div> -->
+            <div class="content-section bg-secondary text-white container-fluid">
+                <h3>Featured title</h3>
+                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence
+                    and probably just keep going until we run out of words.</p>
+                <a href="#" class="btn btn-black">
+                    Primary button
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var home_page = true;
+</script>
+{% endblock content %}

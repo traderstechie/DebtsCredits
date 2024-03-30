@@ -1,0 +1,46 @@
+header {
+    background-color: black;
+    color: whitesmoke;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 20px 40px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+
+/* @media only screen and (min-width: 768px) {
+    
+} */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  /* background-color: #dddddd; */
+  /* background-color: #585555; */
+  /* background-color: #6c757d; */
+  background-color: #8795a0;
+}
+
+/* div.wrapWhiteSpace {
+  white-space: nowrap;
+}
+
+table.wrapWhiteSpace {
+  white-space: nowrap;
+}
+
+.normal-white-space {
+  white-space: nowrap;
+} */
