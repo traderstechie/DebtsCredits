@@ -26,7 +26,7 @@ td, th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
+tr:nth-child(even):not(.no-nth-bg) {
   /* background-color: #dddddd; */
   /* background-color: #585555; */
   /* background-color: #6c757d; */

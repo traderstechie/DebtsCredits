@@ -92,11 +92,69 @@
                     <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
                         data-target="#creditorsList">Creditors</a>
                     <hr>
-                    <div class="content-section moreOptionContent" hidden id="debtorsList">
-                        <p class="text-dark">Full list of Debtors</p>
+                    <div class="moreOptionContent table-responsive bg-dark" hidden id="debtorsList">
+                        <h6>List of Debtors</h6>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <th>Name</th>
+                                    <th>ID</th>
+                                    <th>Num of Tnxs</th>
+                                    <th>Debts</th>
+                                    <th>Payments</th>
+                                    <th>Balance</th>
+                                    <th>Created On</th>
+                                    <th>Created Via</th>
+                                </thead>
+                                <tbody>
+                                    {% for deb in dcp_data[lcl.debtors] %}
+                                    <tr class="no-nth-bg">
+                                        <td>{{ deb[lcl.name] }}</td>
+                                        <td>{{ deb[lcl.id] }}</td>
+                                        <td>{{ deb[lcl.num_of_transactions] }}</td>
+                                        <td>{{ utils.two_decimals(deb[lcl.total_debts]) }}</td>
+                                        <td>{{ utils.two_decimals(deb[lcl.total_payments]) }}</td>
+                                        <td>{{ utils.two_decimals(deb[lcl.current_book_balance]) }}</td>
+                                        <td>{{ datetime.fromisoformat(deb[lcl.created_on]).strftime('%a, %d-%b-%Y') }}
+                                        </td>
+                                        <td>{{ deb[lcl.created_via] }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="content-section moreOptionContent" hidden id="creditorsList">
-                        <p class="text-dark">Full list of Creditors</p>
+                    <div class="moreOptionContent table-responsive bg-dark" hidden id="creditorsList">
+                        <h6>List of Creditors</h6>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <th>Name</th>
+                                    <th>ID</th>
+                                    <th>Num of Tnxs</th>
+                                    <th>Credits</th>
+                                    <th>Payments</th>
+                                    <th>Balance</th>
+                                    <th>Created On</th>
+                                    <th>Created Via</th>
+                                </thead>
+                                <tbody>
+                                    {% for cred in dcp_data[lcl.creditors] %}
+                                    <tr class="no-nth-bg">
+                                        <td>{{ cred[lcl.name] }}</td>
+                                        <td>{{ cred[lcl.id] }}</td>
+                                        <td>{{ cred[lcl.num_of_transactions] }}</td>
+                                        <td>{{ utils.two_decimals(cred[lcl.total_credits]) }}</td>
+                                        <td>{{ utils.two_decimals(cred[lcl.total_payments]) }}</td>
+                                        <td>{{ utils.two_decimals(cred[lcl.current_book_balance]) }}</td>
+                                        <td>{{ datetime.fromisoformat(cred[lcl.created_on]).strftime('%a, %d-%b-%Y') }}
+                                        </td>
+                                        <td>{{ cred[lcl.created_via] }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
