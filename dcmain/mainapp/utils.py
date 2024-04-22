@@ -1,4 +1,18 @@
+import os
 from decimal import Decimal
+
+from flask import current_app
+
+from dcmain.config import Config
+from dcmain.appstrings import ccl, lcl, ucl
+
+
+def is_eq(v1, v2):
+    return v1 == v2
+
+
+def not_eq(v1, v2):
+    return v1 != v2
 
 
 def is_valid_numeric(string, not_zero=False, not_fraction=False, not_negative=False):
@@ -61,3 +75,42 @@ def format_decimal(value, places=2, currency_symbol=None, no_grouping=False, rd=
 def two_decimals(value, currency_symbol=None, rd=False):
     """See `format_decimal` function for modalities"""
     return format_decimal(value, places=2, currency_symbol=currency_symbol, rd=rd)
+
+
+TEST_DCP_PARAMS = {
+    lcl.development: {
+        lcl.user_id: "1088823636",
+        lcl.dc_profile_id: "3505DCP36219811",
+        lcl.pin: os.environ.get(ucl.TP_DEV_PIN),
+        lcl.password: os.environ.get(ucl.TP_DEV_PASSWORD),
+    },
+    lcl.production: {
+        lcl.pin: "",
+        lcl.password: "test1234",
+        lcl.user_id: "1045236820",
+        lcl.dc_profile_id: "4103DCP20256990",
+    },
+}
+
+
+def get_route_essentials(headers: dict = None):
+    if current_app.config.get(ucl.PRODUCTION_ENV):
+        d = TEST_DCP_PARAMS[lcl.production]
+
+        root_domain = "https://tradepally.com"
+
+        headers.update(
+            {ccl.AUTHORIZATION: Config.TRADEPALLY_PRODUCTION_API_AUTH_TOKEN})
+    else:
+        d = TEST_DCP_PARAMS[lcl.development]
+
+        root_domain = "http://localhost:5000"
+
+        headers.update(
+            {ccl.AUTHORIZATION: Config.TRADEPALLY_LOCALHOST_API_AUTH_TOKEN})
+
+    return {
+        lcl.params: d,
+        lcl.headers: headers,
+        lcl.root_domain: root_domain
+    }

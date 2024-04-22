@@ -2,11 +2,11 @@
 {% block content %}
 <div class="container px-4 py-1" id="home_page">
     <!-- <h2 class="pb-2">Tradepally Debts-Credits API Usage</h2> -->
-    <p class="p-2 content-section bg-light">
+    <p class="p-2 content-section bg-light main-description">
         This webpage illustrates minimal usage of a Debt & Credit Recording module which is part of a larger
         bookkeeping app, <a href="https://Tradepally.com/" class="text-decoration-none"><em>Tradepally</em></a>. The
-        module is used to keep simple but detailed and dynamic record of debtors and creditors for individual, business
-        or organisation, and I recently exposed the module for use in another project via an API. The complete code for
+        module is used to keep simple but detailed and dynamic record of debtors and creditors for individual, business,
+        or organisation. I recently exposed the module for use in another project via an API. The complete code for
         this project is on <a href="https://github.com/traderstechie/DebtsCredits" class="text-decoration-none"><em>This
                 GitHub Repo</em></a>
     </p>
@@ -81,16 +81,23 @@
             </div> -->
             <div class="content-section bg-secondary text-white container-fluid">
                 <h3>Debtors & Creditors</h3>
-                <p class="border-bottom">
-                    Debtors and creditors listed here, were created by visitors like yourself to test the application.
-                    You can create one below or proceed to <strong>Transactions</strong> to create a new transaction for
-                    any debtor/creditor shown
+                <!-- <p class="border-bottom"> -->
+                <p>
+                    All debtors/creditors viewable via the <em><strong>Debtors</strong></em> and
+                    <em><strong>Creditors</strong></em> buttons below were added via the API for
+                    the test profile. You can add your own via the <em><strong>Add Debtor</strong></em>
+                    or <em><strong>Add Creditor</strong></em> buttons, to test the API for yourself.
+                    <br> <br>
                 </p>
                 <div class="container text-center">
                     <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
                         data-target="#debtorsList">Debtors</a>
                     <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
                         data-target="#creditorsList">Creditors</a>
+                    <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
+                        data-target="#addDebtor">Add Debtor</a>
+                    <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
+                        data-target="#addCreditor">Add Creditor</a>
                     <hr>
                     <div class="moreOptionContent table-responsive bg-dark" hidden id="debtorsList">
                         <h6>List of Debtors</h6>
@@ -155,6 +162,43 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="moreOptionContent text-dark" hidden id="addDebtor">
+                        <h5>Add New Debtor</h5>
+                        <form action="{{ url_for('mainapp.create_debtor_or_creditor') }}" method="post"
+                            class="content-section-mini">
+                            <!-- Hidden Indicator -->
+                            <input type="hidden" name="{{lcl.creating}}" value="{{ccl.DEBTOR}}">
+
+                            <!-- User Inputs -->
+                            <div>
+                                <label for="">Debtor Name</label>
+                                <input type="text" name="name" required class="form-control">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">Creditor DC Profile ID</label>
+                                <input type="text" name="creditor_dc_profile_id" required class="form-control">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">User Password</label>
+                                <input type="password" name="user_password" required class="form-control"
+                                    value="{{user_password}}">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">User Pin (Optional)</label>
+                                <input type="password" name="user_pin" class="form-control" value="{{user_pin}}">
+                                <br>
+                            </div>
+                            <div>
+                                <input type="submit" class="btn btn-sm btn-info" value="Proceed">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="moreOptionContent bg-dark" hidden id="addCreditor">
+                        <h6>Add New Creditor</h6>
                     </div>
                 </div>
             </div>

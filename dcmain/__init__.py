@@ -1,7 +1,7 @@
 from flask import Flask
 
 from . import config
-from . import mainapp
+# from . import mainapp
 from .appstrings import ccl, lcl, ucl
 
 
@@ -21,7 +21,7 @@ def create_app(config_type=None):
     @app.context_processor
     def context_processor():
         from datetime import datetime
-        from dcmain import utils
+        from dcmain.mainapp import utils
         return dict(
             ccl=ccl,
             lcl=lcl,
@@ -31,6 +31,9 @@ def create_app(config_type=None):
             commit_hash=config_obj.COMMIT_HASH
         )
 
-    app.add_url_rule("/", view_func=mainapp.home)
+    # app.add_url_rule("/", view_func=mainapp.home)
+    from dcmain.mainapp.routes import mainapp
+
+    app.register_blueprint(mainapp)
 
     return app

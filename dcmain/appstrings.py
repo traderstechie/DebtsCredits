@@ -1,18 +1,25 @@
 class ccl:
+    DEBTOR = "Debtor"
+    CREDITOR = "Creditor"
     AUTHORIZATION = "Authorization"
 
 
 class lcl:
     id = "id"
+    pin = "pin"
     name = "name"
     code = "code"
+    params = "params"
     symbol = "symbol"
+    headers = "headers"
     testing = "testing"
     user_id = "user_id"
     default = "default"
     debtors = "debtors"
     password = "password"
+    creating = "creating"
     timezone = "timezone"
+    user_pin = "user_pin"
     creditors = "creditors"
     created_on = "created_on"
     production = "production"
@@ -20,6 +27,8 @@ class lcl:
     total_debts = "total_debts"
     created_via = "created_via"
     all_debtors = "all_debtors"
+    root_domain = "root_domain"
+    user_password = "user_password"
     all_creditors = "all_creditors"
     dc_profile_id = "dc_profile_id"
     total_credits = "total_credits"
@@ -33,6 +42,8 @@ class lcl:
     primary_currency_d = "primary_currency_d"
     num_of_transactions = "num_of_transactions"
     current_book_balance = "current_book_balance"
+    debtor_dc_profile_id = "debtor_dc_profile_id"
+    creditor_dc_profile_id = "creditor_dc_profile_id"
     payables_and_receivables_d = "payables_and_receivables_d"
 
 
@@ -40,6 +51,7 @@ class ucl:
     WAT = "WAT"
     API = "API"
     TESTING = "TESTING"
+    TP_DEV_PIN = "TP_DEV_PIN"
     SECRET_KEY = "SECRET_KEY"
     PRODUCTION = "PRODUCTION"
     SOURCE_HASH = "SOURCE_HASH"

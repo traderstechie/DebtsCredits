@@ -11,8 +11,32 @@ header {
     margin-bottom: 20px;
   }
 
+.content-section-mini {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
 /* @media only screen and (min-width: 768px) {
     
+} */
+
+.main-description {
+  padding: 20px;
+  box-shadow:
+    inset 0 -3em 3em rgb(0 200 0 / 30%),
+    0 0 0 2px white,
+    0.3em 0.3em 1em rgb(200 0 0 / 60%);
+}
+
+/* .main-description {
+  padding: 20px;
+  box-shadow:
+    inset 0 -3em 3em rgba(139, 146, 139, 0.3),
+    0 0 0 2px white,
+    0.3em 0.3em 1em rgba(8, 8, 8, 0.6);
 } */
 
 table {

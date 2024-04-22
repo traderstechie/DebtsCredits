@@ -39,14 +39,18 @@
                     <use xlink:href="#bootstrap" />
                 </svg>
             </a> -->
-            <button type="button" class="btn d-flex align-items-center mb-2 mb-md-0 ms-4 right-nav">
-                <!-- <a href="/"
+            <div class="col-md-4 text-start left-nav">
+                <!-- <button type="button" class="btn d-flex align-items-center mb-2 mb-md-0 ms-4 left-nav"> -->
+                <button type="button" class="btn align-items-center mb-2 ms-2">
+                    <!-- <a href="/"
                     class="d-flex align-items-center ms-4 col-md-3 mb-2 mb-md-0 text-white text-decoration-none">
                     <strong>Tradepally Debts Credits API Usage</strong>
                 </a> -->
-                <a href="/" class="text-white text-decoration-none"><strong>Tradepally Debts Credits API
-                        Usage</strong></a>
-            </button>
+                    <a href="{{ url_for('mainapp.home') }}" class="text-white text-decoration-none">
+                        <strong>Tradepally Debts Credits API Usage</strong>
+                    </a>
+                </button>
+            </div>
 
             <!-- <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
@@ -56,7 +60,7 @@
                 <li><a href="#" class="nav-link px-2 link-light">About</a></li>
             </ul> -->
 
-            <div class="col-md-4 text-end left-nav">
+            <div class="col-md-4 text-end right-nav">
                 <button type="button" class="btn btn-sm btn-outline-light me-2">
                     <a class="nav-link px-2" href="https://tradepally.com/api/v1/ui">Live Docs</a>
                 </button>
