@@ -60,12 +60,16 @@ def create_debtor_or_creditor():
     user_password = request.form.get(lcl.user_password)
 
     if mu.is_eq(creating, ccl.DEBTOR):
-        params = {lcl.creditor_dc_profile_id: request.form.get(
-            lcl.creditor_dc_profile_id)}
+        params = {
+            lcl.creditor_dc_profile_id: request.form.get(
+                lcl.creditor_dc_profile_id)
+        }
 
     if mu.is_eq(creating, ccl.CREDITOR):
-        params = {lcl.debtor_dc_profile_id: request.form.get(
-            lcl.debtor_dc_profile_id)}
+        params = {
+            lcl.debtor_dc_profile_id: request.form.get(
+                lcl.debtor_dc_profile_id)
+        }
 
     ess = mu.get_route_essentials(auth_header)
 
@@ -84,8 +88,8 @@ def create_debtor_or_creditor():
         json=params,
     )
 
-    print(params)
-    print(d_or_c_data)
-    print(d_or_c_data.text)
+    # print(params)
+    # print(d_or_c_data)
+    # print(d_or_c_data.text)
 
     return redirect(url_for('mainapp.home'))
