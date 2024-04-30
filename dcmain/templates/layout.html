@@ -34,31 +34,13 @@
     <div class="container">
         <header
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <!-- <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                    <use xlink:href="#bootstrap" />
-                </svg>
-            </a> -->
             <div class="col-md-4 text-start left-nav">
-                <!-- <button type="button" class="btn d-flex align-items-center mb-2 mb-md-0 ms-4 left-nav"> -->
                 <button type="button" class="btn align-items-center mb-2 ms-2">
-                    <!-- <a href="/"
-                    class="d-flex align-items-center ms-4 col-md-3 mb-2 mb-md-0 text-white text-decoration-none">
-                    <strong>Tradepally Debts Credits API Usage</strong>
-                </a> -->
                     <a href="{{ url_for('mainapp.home') }}" class="text-white text-decoration-none">
                         <strong>Tradepally Debts Credits API Usage</strong>
                     </a>
                 </button>
             </div>
-
-            <!-- <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">Features</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">Pricing</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2 link-light">About</a></li>
-            </ul> -->
 
             <div class="col-md-4 text-end right-nav">
                 <button type="button" class="btn btn-sm btn-outline-light me-2">
@@ -75,6 +57,17 @@
     </div>
 
     <main role="main" class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <!--Block Content-->
         {% block content %}
         {% endblock %}
     </main>

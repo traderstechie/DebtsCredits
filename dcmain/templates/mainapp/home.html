@@ -3,20 +3,18 @@
 <div class="container px-4 py-1" id="home_page">
     <!-- <h2 class="pb-2">Tradepally Debts-Credits API Usage</h2> -->
     <p class="p-2 content-section bg-light main-description">
-        This webpage illustrates minimal usage of a Debt & Credit Recording module which is part of a larger
-        bookkeeping app, <a href="https://Tradepally.com/" class="text-decoration-none"><em>Tradepally</em></a>. The
+        This webpage illustrates minimal usage of a Debts & Credits Recording module, which is part of a larger
+        bookkeeping app, <a href="https://Tradepally.com/" class="text-decoration-none"><em>Tradepally</em></a>. {# The
         module is used to keep simple but detailed and dynamic record of debtors and creditors for individual, business,
-        or organisation. I recently exposed the module for use in another project via an API. The complete code for
-        this project is on <a href="https://github.com/traderstechie/DebtsCredits" class="text-decoration-none"><em>This
-                GitHub Repo</em></a>
+        or organisation.#} I recently exposed the module for use in another project via an API and decided to put up a
+        glympse here. The module's full functionality includes more indebt operations, like linking debtor to creditor
+        and vice versa, and linking either to other users on the platform who can assent to txns meant for them, thereby
+        adding a layer of legitimacy, among other features. The complete code for
+        this project is at <a href="https://github.com/traderstechie/DebtsCredits" class="text-decoration-none"><em>This
+                GitHub Repo</em></a>.
     </p>
     <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
         <div class="col d-flex align-items-start">
-            <!-- <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em">
-                    <use xlink:href="#toggles2" />
-                </svg>
-            </div> -->
             <div class="content-section bg-secondary text-white container-fluid">
                 <h3>Featured Profile</h3>
                 <table class="table-responsive">
@@ -68,25 +66,16 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <a href="#" class="btn btn-black">
-                    Primary button
-                </a> -->
             </div>
         </div>
         <div class="col d-flex align-items-start">
-            <!-- <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em">
-                    <use xlink:href="#cpu-fill" />
-                </svg>
-            </div> -->
             <div class="content-section bg-secondary text-white container-fluid">
                 <h3>Debtors & Creditors</h3>
-                <!-- <p class="border-bottom"> -->
                 <p>
-                    All debtors/creditors viewable via the <em><strong>Debtors</strong></em> and
-                    <em><strong>Creditors</strong></em> buttons below were added via the API for
-                    the test profile. You can add your own via the <em><strong>Add Debtor</strong></em>
-                    or <em><strong>Add Creditor</strong></em> buttons, to test the API for yourself.
+                    All the items displayed via the <strong>Debtors</strong> and
+                    <strong>Creditors</strong> buttons below were added using the API for
+                    the featured profile. You can add new ones via the <strong>Add Debtor</strong>
+                    or <strong>Add Creditor</strong> buttons to test it for yourself.
                     <br> <br>
                 </p>
                 <div class="container text-center">
@@ -167,8 +156,9 @@
                         <h5>Add New Debtor</h5>
                         <form action="{{ url_for('mainapp.create_debtor_or_creditor') }}" method="post"
                             class="content-section-mini">
-                            <!-- Hidden Indicator -->
-                            <input type="hidden" name="{{lcl.creating}}" value="{{ccl.DEBTOR}}">
+                            <!-- Hidden Inputs -->
+                            <input type="hidden" name="{{csrf_token}}">
+                            <input type="hidden" name="{{lcl.creating}}" value="{{lcl.debtor}}">
 
                             <!-- User Inputs -->
                             <div>
@@ -177,8 +167,9 @@
                                 <br>
                             </div>
                             <div>
-                                <label for="">Creditor DC Profile ID</label>
-                                <input type="text" name="creditor_dc_profile_id" required class="form-control">
+                                <label for="">DC Profile ID</label>
+                                <input type="text" name="creditor_dc_profile_id" required class="form-control"
+                                    value="{{ dcp_data[lcl.id] }}">
                                 <br>
                             </div>
                             <div>
@@ -197,25 +188,54 @@
                             </div>
                         </form>
                     </div>
-                    <div class="moreOptionContent bg-dark" hidden id="addCreditor">
-                        <h6>Add New Creditor</h6>
+                    <div class="moreOptionContent text-dark" hidden id="addCreditor">
+                        <h5>Add New Creditor</h5>
+                        <form action="{{ url_for('mainapp.create_debtor_or_creditor') }}" method="post"
+                            class="content-section-mini">
+                            <!-- Hidden Inputs -->
+                            <input type="hidden" name="{{csrf_token}}">
+                            <input type="hidden" name="{{lcl.creating}}" value="{{lcl.creditor}}">
+
+                            <!-- User Inputs -->
+                            <div>
+                                <label for="">Creditor Name</label>
+                                <input type="text" name="name" required class="form-control">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">DC Profile ID</label>
+                                <input type="text" name="debtor_dc_profile_id" required class="form-control"
+                                    value="{{ dcp_data[lcl.id] }}">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">User Password</label>
+                                <input type="password" name="user_password" required class="form-control"
+                                    value="{{user_password}}">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">User Pin (Optional)</label>
+                                <input type="password" name="user_pin" class="form-control" value="{{user_pin}}">
+                                <br>
+                            </div>
+                            <div>
+                                <input type="submit" class="btn btn-sm btn-info" value="Proceed">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col d-flex align-items-start">
-            <!-- <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                <svg class="bi" width="1em" height="1em">
-                    <use xlink:href="#tools" />
-                </svg>
-            </div> -->
             <div class="content-section bg-secondary text-white container-fluid">
-                <h3>Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence
-                    and probably just keep going until we run out of words.</p>
-                <a href="#" class="btn btn-black">
-                    Primary button
-                </a>
+                <h3>Transactions</h3>
+                <p>
+                    There can be <strong>Debt, Credit, Debt Payment, and Credit Payment transactions</strong>. A debt
+                    txn represents money you received from a creditor and credit txn represents money you gave to a
+                    debtor. And on the flip side, a debt payment txn reps payment you made to a creditor and credit
+                    payment reps money a debtor paid to you.
+                </p>
             </div>
         </div>
     </div>

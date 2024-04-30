@@ -1,5 +1,6 @@
 class ccl:
     DEBTOR = "Debtor"
+    FAILURE = "Failure"
     CREDITOR = "Creditor"
     AUTHORIZATION = "Authorization"
 
@@ -7,10 +8,14 @@ class ccl:
 class lcl:
     id = "id"
     pin = "pin"
+    json = "json"
     name = "name"
     code = "code"
+    status = "status"
+    errors = "errors"
     params = "params"
     symbol = "symbol"
+    debtor = "debtor"
     headers = "headers"
     testing = "testing"
     user_id = "user_id"
@@ -20,6 +25,7 @@ class lcl:
     creating = "creating"
     timezone = "timezone"
     user_pin = "user_pin"
+    creditor = "creditor"
     creditors = "creditors"
     created_on = "created_on"
     production = "production"

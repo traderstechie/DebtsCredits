@@ -1,9 +1,9 @@
+import json
 import requests
 from datetime import datetime
-from flask import redirect, render_template, current_app, url_for, Blueprint, request
+from flask import flash, redirect, render_template, url_for, Blueprint, request
 
 from . import utils as mu
-from dcmain.config import Config
 from dcmain.appstrings import ucl, ccl, lcl
 
 mainapp = Blueprint('mainapp', __name__)
@@ -47,8 +47,8 @@ def home():
         }
     }
 
-    return render_template("mainapp/home.html", title="Home", dcp_data=dcp_data.json() or dummy_dcp_data,
-                           user_password=d[lcl.password], user_pin=d[lcl.pin])
+    return render_template("mainapp/home.html", dcp_data=dcp_data.json() or dummy_dcp_data,
+                           title="Home", user_password=d[lcl.password], user_pin=d[lcl.pin])
 
 
 @mainapp.route("/mainapp/create-debtor-creditor/", methods=['GET', 'POST'])
@@ -59,13 +59,13 @@ def create_debtor_or_creditor():
     user_pin = request.form.get(lcl.user_pin)
     user_password = request.form.get(lcl.user_password)
 
-    if mu.is_eq(creating, ccl.DEBTOR):
+    if mu.is_eq(creating, lcl.debtor):
         params = {
             lcl.creditor_dc_profile_id: request.form.get(
                 lcl.creditor_dc_profile_id)
         }
 
-    if mu.is_eq(creating, ccl.CREDITOR):
+    if mu.is_eq(creating, lcl.creditor):
         params = {
             lcl.debtor_dc_profile_id: request.form.get(
                 lcl.debtor_dc_profile_id)
@@ -82,14 +82,33 @@ def create_debtor_or_creditor():
     })
 
     d_or_c_data = requests.post(
-        f"{ess[lcl.root_domain]}/api/v1/debts-credits/debtor/create/",
+        f"{ess[lcl.root_domain]}/api/v1/debts-credits/{creating}/create/",
         headers=auth_header,
         timeout=1200,
         json=params,
     )
 
-    # print(params)
-    # print(d_or_c_data)
-    # print(d_or_c_data.text)
+    print(params)
+    print(d_or_c_data)
+    print(d_or_c_data.text)
+    print(json.loads(d_or_c_data.text))
+
+    res_d = json.loads(d_or_c_data.text)
+
+    if res_d.get(lcl.name) == name:
+        # Success
+        flash("New profile created successfully", 'success')
+    elif res_d.get(lcl.status) == ccl.FAILURE:
+        # Customer error
+        flash("Operation failed with following messages:", 'info')
+        for msg in res_d[lcl.errors]:
+            flash(f"{msg}", 'warning')
+    elif res_d.get(lcl.code):
+        # Auto generated error
+        flash("Operation failed with following messages:", 'info')
+        for k, v in res_d.get(lcl.errors, {}).get(lcl.json, {}).items():
+            flash(f"{k}: {v}", 'warning')
+    else:
+        flash("Unknown operation failure", 'info')
 
     return redirect(url_for('mainapp.home'))

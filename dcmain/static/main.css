@@ -19,10 +19,6 @@ header {
     margin-bottom: 10px;
   }
 
-/* @media only screen and (min-width: 768px) {
-    
-} */
-
 .main-description {
   padding: 20px;
   box-shadow:
@@ -30,14 +26,6 @@ header {
     0 0 0 2px white,
     0.3em 0.3em 1em rgb(200 0 0 / 60%);
 }
-
-/* .main-description {
-  padding: 20px;
-  box-shadow:
-    inset 0 -3em 3em rgba(139, 146, 139, 0.3),
-    0 0 0 2px white,
-    0.3em 0.3em 1em rgba(8, 8, 8, 0.6);
-} */
 
 table {
   border-collapse: collapse;
@@ -51,20 +39,5 @@ td, th {
 }
 
 tr:nth-child(even):not(.no-nth-bg) {
-  /* background-color: #dddddd; */
-  /* background-color: #585555; */
-  /* background-color: #6c757d; */
   background-color: #8795a0;
 }
-
-/* div.wrapWhiteSpace {
-  white-space: nowrap;
-}
-
-table.wrapWhiteSpace {
-  white-space: nowrap;
-}
-
-.normal-white-space {
-  white-space: nowrap;
-} */
