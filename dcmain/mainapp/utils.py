@@ -74,6 +74,8 @@ def format_decimal(value, places=2, currency_symbol=None, no_grouping=False, rd=
 
 def two_decimals(value, currency_symbol=None, rd=False):
     """See `format_decimal` function for modalities"""
+    # if isinstance(value, str):
+    #     value = Decimal(value)
     return format_decimal(value, places=2, currency_symbol=currency_symbol, rd=rd)
 
 

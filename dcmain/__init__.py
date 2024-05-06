@@ -1,8 +1,10 @@
 from flask import Flask
+from flask_wtf import CSRFProtect
 
 from . import config
-# from . import mainapp
 from .appstrings import ccl, lcl, ucl
+
+csrf = CSRFProtect()
 
 
 def create_app(config_type=None):
@@ -17,6 +19,9 @@ def create_app(config_type=None):
     config.config_classes[config_type].init_app(app)
     config_obj = config.config_classes[config_type]
     config.Config.CONFIG_TYPE = config_type
+
+    with app.app_context():
+        csrf.init_app(app)
 
     @app.context_processor
     def context_processor():

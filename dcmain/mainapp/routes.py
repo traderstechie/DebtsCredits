@@ -112,3 +112,10 @@ def create_debtor_or_creditor():
         flash("Unknown operation failure", 'info')
 
     return redirect(url_for('mainapp.home'))
+
+
+@mainapp.route("/mainapp/create-debts-credits-txn/", methods=['GET', 'POST'])
+def create_debts_credits_transaction():
+    pass
+
+    return redirect(url_for('mainapp.home'))

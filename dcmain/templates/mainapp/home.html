@@ -157,7 +157,7 @@
                         <form action="{{ url_for('mainapp.create_debtor_or_creditor') }}" method="post"
                             class="content-section-mini">
                             <!-- Hidden Inputs -->
-                            <input type="hidden" name="{{csrf_token}}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="{{lcl.creating}}" value="{{lcl.debtor}}">
 
                             <!-- User Inputs -->
@@ -193,7 +193,7 @@
                         <form action="{{ url_for('mainapp.create_debtor_or_creditor') }}" method="post"
                             class="content-section-mini">
                             <!-- Hidden Inputs -->
-                            <input type="hidden" name="{{csrf_token}}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="{{lcl.creating}}" value="{{lcl.creditor}}">
 
                             <!-- User Inputs -->
@@ -236,6 +236,117 @@
                     debtor. And on the flip side, a debt payment txn reps payment you made to a creditor and credit
                     payment reps money a debtor paid to you.
                 </p>
+                <div class="container text-center">
+                    <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
+                        data-target="#transactionsList">Transactions</a>
+                    <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
+                        data-target="#addTransaction">Add Transaction</a>
+                    <hr>
+                    <div class="moreOptionContent table-responsive bg-dark" hidden id="transactionsList">
+                        <h6>List of Last 50 Transactions</h6>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Amount ({{ curr[lcl.symbol] }})</th>
+                                    <th>Means</th>
+                                    <th>Narration</th>
+                                    <th>Other Party</th>
+                                    <th>Posted (UTC)</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    {% for dc_tr in dcp_data[lcl.transactions] %}
+                                    <tr class="no-nth-bg">
+                                        <td>{{ datetime.fromisoformat(dc_tr[lcl.transaction_date]).strftime('%d/%b/%Y')
+                                            }}</td>
+                                        <td>{{ dc_tr[lcl.transaction_mode_for_display] }}</td>
+                                        <td>{{ utils.two_decimals(dc_tr[lcl.amount]) }}</td>
+                                        <td>{{ dc_tr[lcl.means_of_payment] }}</td>
+                                        <td>{{ dc_tr[lcl.narration] }}</td>
+                                        <td>{{ dc_tr[lcl.other_party_name] }}</td>
+
+                                        <td>{{ datetime.fromisoformat(dc_tr[lcl.datetime_posted]).strftime('%d/%b/%Y,
+                                            %H:%M:%S') }}</td>
+
+                                        <td>{{ dc_tr[lcl.created_via] }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="moreOptionContent text-dark" hidden id="addTransaction">
+                        <h5>Add New Transaction</h5>
+                        <form action="{{ url_for('mainapp.create_debts_credits_transaction') }}" method="post"
+                            class="content-section-mini">
+                            <!-- Hidden Inputs -->
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="dc_profile_id" value="{{dcp_data[lcl.id]}}">
+                            <!-- User Inputs -->
+                            <div>
+                                <label for="">Date <small>(Optional)</small></label>
+                                <input type="date" name="transaction_date" class="form-control">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">Txn Object Type</label>
+                                <select name="object_type" required class="form-control">
+                                    <option value=""></option>
+                                    <option value="{{ccl.DEBTOR}}">{{ccl.DEBTOR}}</option>
+                                    <option value="{{ccl.CREDITOR}}">{{ccl.CREDITOR}}</option>
+                                </select>
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">Txn Object</label>
+                                <select name="other_party_id" required id="other_party_id" class="form-control">
+                                    <option value=""></option>
+                                    <!-- DYNAMICALLY POPULATED -->
+                                </select>
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">Txn Mode</label>
+                                <select name="transaction_mode" required id="transaction_mode" class="form-control">
+                                    <option value=""></option>
+                                    <!-- DYNAMICALLY POPULATED -->
+                                </select>
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">Amount</label>
+                                <input type="number" name="amount" required class="form-control">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">Means of Payment</label>
+                                <input type="text" name="means_of_payment" required maxlength="50" class="form-control">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">Narration <small>(Optional)</small></label>
+                                <input type="text" name="narration" maxlength="100" class="form-control">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">User Password</label>
+                                <input type="password" name="user_password" required class="form-control"
+                                    value="{{user_password}}">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="">User Pin (Optional)</label>
+                                <input type="password" name="user_pin" class="form-control" value="{{user_pin}}">
+                                <br>
+                            </div>
+                            <div>
+                                <input type="submit" class="btn btn-sm btn-info" value="Proceed">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

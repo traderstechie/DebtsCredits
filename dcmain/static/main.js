@@ -40,4 +40,43 @@ if (typeof home_page !== 'undefined') {
       displayMoreOptionsOptContent(target.parentNode);
     }
   });
+
+  document.getElementById('home_page').addEventListener('change', function (e) {
+    let target = e.target;
+    if (!target) return;
+
+    if (target.name === 'object_type') {
+      let txnObjSel = document.getElementById('other_party_id');
+      let txnModeSel = document.getElementById('transaction_mode');
+
+      txnObjSel.innerHTML = '';
+      txnModeSel.innerHTML = '';
+
+      let modeOptions = [
+        `${lcl.credit_transaction}.Credit To Dector`,
+        `${lcl.credit_payment}.Pay From Dector`,
+        `${lcl.debt_transaction}.Debt To Creditor`,
+        `${lcl.debt_payment}.Pay To Creditor`,
+      ];
+
+      // let modeOpt1 = document.createElement('option');
+      // let modeOpt2 = document.createElement('option');
+
+      if (target.value === `${ccl.DEBTOR}`) {
+        for (let indx in modeOptions.slice(0, 2)) {
+          let newOpt = document.createElement('option');
+          [newOpt.value, newOpt.innerHTML] = modeOptions[indx].split('.');
+          txnModeSel.options.add(newOpt);
+        }
+      } else if (target.value === `${ccl.CREDITOR}`) {
+        for (let indx in modeOptions.slice(2, 3)) {
+          let newOpt = document.createElement('option');
+          [newOpt.value, newOpt.innerHTML] = modeOptions[indx].split('.');
+          txnModeSel.options.add(newOpt);
+        }
+      } else {
+        // DO NOTHING as the inputs are already reset above
+      }
+    }
+  });
 }
