@@ -293,24 +293,21 @@
                             <div>
                                 <label for="">Txn Object Type</label>
                                 <select name="object_type" required class="form-control">
-                                    <option value=""></option>
+                                    <option value="">Select</option>
                                     <option value="{{ccl.DEBTOR}}">{{ccl.DEBTOR}}</option>
                                     <option value="{{ccl.CREDITOR}}">{{ccl.CREDITOR}}</option>
                                 </select>
                                 <br>
                             </div>
                             <div>
-                                <label for="">Txn Object</label>
-                                <select name="other_party_id" required id="other_party_id" class="form-control">
-                                    <option value=""></option>
-                                    <!-- DYNAMICALLY POPULATED -->
-                                </select>
+                                <label for="" id="other_party_id_label">Txn Object</label>
+                                <input type="text" name="other_party_id" required id="other_party_id"
+                                    class="form-control">
                                 <br>
                             </div>
                             <div>
                                 <label for="">Txn Mode</label>
                                 <select name="transaction_mode" required id="transaction_mode" class="form-control">
-                                    <option value=""></option>
                                     <!-- DYNAMICALLY POPULATED -->
                                 </select>
                                 <br>

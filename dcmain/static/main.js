@@ -46,36 +46,60 @@ if (typeof home_page !== 'undefined') {
     if (!target) return;
 
     if (target.name === 'object_type') {
-      let txnObjSel = document.getElementById('other_party_id');
       let txnModeSel = document.getElementById('transaction_mode');
+      let txnObjLabel = document.getElementById('other_party_id_label');
 
-      txnObjSel.innerHTML = '';
       txnModeSel.innerHTML = '';
 
-      let modeOptions = [
-        `${lcl.credit_transaction}.Credit To Dector`,
-        `${lcl.credit_payment}.Pay From Dector`,
-        `${lcl.debt_transaction}.Debt To Creditor`,
-        `${lcl.debt_payment}.Pay To Creditor`,
+      // Set first "empty" option for txn mode
+      let newOpt = document.createElement('option');
+      [newOpt.value, newOpt.innerHTML] = ['', 'Select'];
+      txnModeSel.options.add(newOpt);
+
+      /*
+      Using this much simpler array and doing
+      `for (let indx in modeOptions.slice())`
+      was returning the first two items when
+      `2, 4` or `-2` is passed to `slice` for 
+      the `(target.value === `${ccl.CREDITOR}`)`
+      So, I'll get back to it in the future
+      const modeOptions = [
+        `${lcl.credit_transaction}.Money To Debtor`,
+        `${lcl.credit_payment}.Payment From Debtor`,
+        `${lcl.debt_transaction}.Money From Creditor`,
+        `${lcl.debt_payment}.Payment To Creditor`,
+      ];
+      */
+
+      const debtorModeOptions = [
+        `${lcl.credit_transaction}.Money To Debtor`,
+        `${lcl.credit_payment}.Payment From Debtor`,
       ];
 
-      // let modeOpt1 = document.createElement('option');
-      // let modeOpt2 = document.createElement('option');
+      const creditorModeOptions = [
+        `${lcl.debt_transaction}.Money From Creditor`,
+        `${lcl.debt_payment}.Payment To Creditor`,
+      ];
 
       if (target.value === `${ccl.DEBTOR}`) {
-        for (let indx in modeOptions.slice(0, 2)) {
+        debtorModeOptions.forEach((opt) => {
           let newOpt = document.createElement('option');
-          [newOpt.value, newOpt.innerHTML] = modeOptions[indx].split('.');
+          [newOpt.value, newOpt.innerHTML] = opt.split('.');
           txnModeSel.options.add(newOpt);
-        }
+        });
+
+        txnObjLabel.innerHTML = `Debtor ID <br> <small><em>(Copy one from Debtors list)</em></small>`;
       } else if (target.value === `${ccl.CREDITOR}`) {
-        for (let indx in modeOptions.slice(2, 3)) {
+        creditorModeOptions.forEach((opt) => {
           let newOpt = document.createElement('option');
-          [newOpt.value, newOpt.innerHTML] = modeOptions[indx].split('.');
+          [newOpt.value, newOpt.innerHTML] = opt.split('.');
           txnModeSel.options.add(newOpt);
-        }
+
+          txnObjLabel.innerHTML = `Creditor ID <br> <small><em>(Copy one from Creditors list)</em></small>`;
+        });
       } else {
-        // DO NOTHING as the inputs are already reset above
+        txnModeSel.innerHTML = '';
+        txnObjLabel.innerHTML = 'Txn Object';
       }
     }
   });

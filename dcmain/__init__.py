@@ -2,7 +2,7 @@ from flask import Flask
 from flask_wtf import CSRFProtect
 
 from . import config
-from .appstrings import ccl, lcl, ucl
+from .appstrings import lcl
 
 csrf = CSRFProtect()
 
@@ -27,12 +27,16 @@ def create_app(config_type=None):
     def context_processor():
         from datetime import datetime
         from dcmain.mainapp import utils
+        from . import appstrings as app_str
         return dict(
-            ccl=ccl,
-            lcl=lcl,
-            ucl=ucl,
             utils=utils,
+            ccl=app_str.ccl,
+            lcl=app_str.lcl,
+            ucl=app_str.ucl,
             datetime=datetime,
+            ccl_dict=app_str.ccl_dict,
+            lcl_dict=app_str.lcl_dict,
+            ucl_dict=app_str.ucl_dict,
             commit_hash=config_obj.COMMIT_HASH
         )
 

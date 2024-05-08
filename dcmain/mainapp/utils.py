@@ -24,7 +24,7 @@ def is_valid_numeric(string, not_zero=False, not_fraction=False, not_negative=Fa
     :param not_negative:  if not_negative=True, return False if string has "-" (ie: is negative)
     :return:
     """
-    if string == '':
+    if string in ('', None):
         return False
     if not_zero:
         if string.isnumeric() and Decimal(string) == 0:

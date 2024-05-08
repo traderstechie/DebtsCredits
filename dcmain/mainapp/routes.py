@@ -1,6 +1,7 @@
 import json
 import requests
-from datetime import datetime
+from decimal import Decimal
+from datetime import datetime, timezone
 from flask import flash, redirect, render_template, url_for, Blueprint, request
 
 from . import utils as mu
@@ -116,6 +117,62 @@ def create_debtor_or_creditor():
 
 @mainapp.route("/mainapp/create-debts-credits-txn/", methods=['GET', 'POST'])
 def create_debts_credits_transaction():
-    pass
+
+    amount = request.form.get(lcl.amount)
+    user_pin = request.form.get(lcl.user_pin)
+    narration = request.form.get(lcl.narration)
+    dc_profile_id = request.form.get(lcl.dc_profile_id)
+    user_password = request.form.get(lcl.user_password)
+    other_party_id = request.form.get(lcl.other_party_id)
+    transaction_date = request.form.get(lcl.transaction_date)
+    transaction_mode = request.form.get(lcl.transaction_mode)
+    means_of_payment = request.form.get(lcl.means_of_payment)
+
+    ess = mu.get_route_essentials(auth_header)
+
+    auth_header.update(ess[lcl.headers])
+
+    params = {
+        lcl.amount: amount,
+        lcl.user_pin: user_pin,
+        lcl.narration: narration,
+        lcl.user_password: user_password,
+        lcl.dc_profile_id: dc_profile_id,
+        lcl.other_party_id: other_party_id,
+        lcl.transaction_mode: transaction_mode,
+        lcl.means_of_payment: means_of_payment,
+        lcl.transaction_date: transaction_date or datetime.now(timezone.utc).isoformat(),
+    }
+
+    d_or_c_data = requests.post(
+        f"{ess[lcl.root_domain]}/api/v1/debts-credits/txn/create/",
+        headers=auth_header,
+        timeout=1200,
+        json=params,
+    )
+
+    print(params)
+    print(d_or_c_data)
+    print(d_or_c_data.text)
+    print(json.loads(d_or_c_data.text))
+
+    res_d = json.loads(d_or_c_data.text)
+
+    if mu.is_valid_numeric(res_d.get(lcl.amount)) \
+            and Decimal(res_d.get(lcl.amount)) == Decimal(amount or '0'):
+        # Success
+        flash("Transaction added successfully", 'success')
+    elif res_d.get(lcl.status) == ccl.FAILURE:
+        # Customer error
+        flash("Operation failed with following messages:", 'info')
+        for msg in res_d[lcl.errors]:
+            flash(f"{msg}", 'warning')
+    elif res_d.get(lcl.code):
+        # Auto generated error
+        flash("Operation failed with following messages:", 'info')
+        for k, v in res_d.get(lcl.errors, {}).get(lcl.json, {}).items():
+            flash(f"{k}: {v}", 'warning')
+    else:
+        flash("Unknown operation failure", 'info')
 
     return redirect(url_for('mainapp.home'))
