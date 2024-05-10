@@ -49,7 +49,8 @@ def home():
     }
 
     return render_template("mainapp/home.html", dcp_data=dcp_data.json() or dummy_dcp_data,
-                           title="Home", user_password=d[lcl.password], user_pin=d[lcl.pin])
+                           title="Home", user_password=d[lcl.password], user_pin=d[lcl.pin],
+                           root_domain=ess[lcl.root_domain])
 
 
 @mainapp.route("/mainapp/create-debtor-creditor/", methods=['GET', 'POST'])
@@ -82,19 +83,23 @@ def create_debtor_or_creditor():
         lcl.user_password: user_password
     })
 
-    d_or_c_data = requests.post(
+    req_res = requests.post(
         f"{ess[lcl.root_domain]}/api/v1/debts-credits/{creating}/create/",
         headers=auth_header,
         timeout=1200,
         json=params,
     )
 
-    print(params)
-    print(d_or_c_data)
-    print(d_or_c_data.text)
-    print(json.loads(d_or_c_data.text))
+    # print(params)
+    # print(req_res)
 
-    res_d = json.loads(d_or_c_data.text)
+    try:
+        res_d = req_res.json() or json.loads(req_res.text)
+    except ValueError:
+        flash("Invalid/empty response received!", 'warning')
+        return redirect(url_for('mainapp.home'))
+
+    # print(res_d)
 
     if res_d.get(lcl.name) == name:
         # Success
@@ -144,19 +149,23 @@ def create_debts_credits_transaction():
         lcl.transaction_date: transaction_date or datetime.now(timezone.utc).isoformat(),
     }
 
-    d_or_c_data = requests.post(
+    req_res = requests.post(
         f"{ess[lcl.root_domain]}/api/v1/debts-credits/txn/create/",
         headers=auth_header,
         timeout=1200,
         json=params,
     )
 
-    print(params)
-    print(d_or_c_data)
-    print(d_or_c_data.text)
-    print(json.loads(d_or_c_data.text))
+    # print(params)
+    # print(req_res)
 
-    res_d = json.loads(d_or_c_data.text)
+    try:
+        res_d = req_res.json() or json.loads(req_res.text)
+    except ValueError:
+        flash("Invalid/empty response received!", 'warning')
+        return redirect(url_for('mainapp.home'))
+
+    # print(res_d)
 
     if mu.is_valid_numeric(res_d.get(lcl.amount)) \
             and Decimal(res_d.get(lcl.amount)) == Decimal(amount or '0'):

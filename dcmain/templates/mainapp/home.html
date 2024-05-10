@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container px-4 py-1" id="home_page">
-    <!-- <h2 class="pb-2">Tradepally Debts-Credits API Usage</h2> -->
     <p class="p-2 content-section bg-light main-description">
         This webpage illustrates minimal usage of a Debts & Credits Recording module, which is part of a larger
-        bookkeeping app, <a href="https://Tradepally.com/" class="text-decoration-none"><em>Tradepally</em></a>. {# The
+        bookkeeping app, <a href="{{root_domain}}" target="_blank" class="text-decoration-none"><em>Tradepally</em></a>.
+        {# The
         module is used to keep simple but detailed and dynamic record of debtors and creditors for individual, business,
         or organisation.#} I recently exposed the module for use in another project via an API and decided to put up a
         glympse here. The module's full functionality includes more indebt operations, like linking debtor to creditor
         and vice versa, and linking either to other users on the platform who can assent to txns meant for them, thereby
         adding a layer of legitimacy, among other features. The complete code for
-        this project is at <a href="https://github.com/traderstechie/DebtsCredits" class="text-decoration-none"><em>This
-                GitHub Repo</em></a>.
+        this project is at <a href="https://github.com/traderstechie/DebtsCredits" target="_blank"
+            class="text-decoration-none"><em>This GitHub Repo</em></a>.
     </p>
     <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
         <div class="col d-flex align-items-start">
