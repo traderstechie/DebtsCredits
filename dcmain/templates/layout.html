@@ -27,22 +27,36 @@
     <title>Debts Credits</title>
     {% endif %}
 
-    <meta name="description" content="">
+    <meta name="description" content="This webpage illustrates minimal usage of a Debts & Credits Recording module, 
+    which is part of a larger bookkeeping app, Tradepally. I recently exposed the module for use in another project 
+    via an API and decided to put up a glympse here. The module's full functionality includes more indebt operations, 
+    like: linking debtor to creditor and vice versa, and linking either to other users on the platform who can 
+    assent to txns meant for them, thereby adding a layer of legitimacy, among other features. The complete code for 
+    this project is on my GitHub: @tradersTechie.">
 </head>
 
 <body>
     <div class="container">
         <header
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <div class="col-md-4 text-start left-nav">
+            <!-- Main title/logo inside header -->
+            <!-- <div class="col-md-4 text-start left-nav">
                 <button type="button" class="btn align-items-center mb-2 ms-2">
                     <a href="{{ url_for('mainapp.home') }}" class="text-white text-decoration-none">
-                        <strong>Tradepally Debts Credits API Usage</strong>
+                        <strong>TRADEPALLY DEBTS CREDITS API USAGE</strong>
+                    </a>
+                </button>
+            </div> -->
+            <div class="col-md-4 text-start left-nav">
+                <button type="button" class="btn align-items-center m-2 ms-2">
+                    <a href="{{ url_for('mainapp.home') }}" class="text-white text-decoration-none">
+                        <strong>TRADEPALLY DEBTS CREDITS API USAGE</strong>
                     </a>
                 </button>
             </div>
 
-            <div class="col-md-4 text-end right-nav">
+            <!-- Main navigations inside header -->
+            <!-- <div class="col-md-4 text-end right-nav">
                 <button type="button" class="btn btn-sm btn-outline-light me-2">
                     <a class="nav-link px-2" href="{{root_domain}}/api/v1/ui" target="_blank">Live Docs</a>
                 </button>
@@ -52,6 +66,19 @@
                 <button type="button" class="btn btn-sm btn-outline-light me-4">
                     <a class="nav-link px-2" href="https://x.com/traderstechie" target="_blank">Me On X</a>
                 </button>
+            </div> -->
+            <div class="col-md-4 text-end right-nav">
+                <div class="me-2">
+                    <button type="button" class="btn btn-sm btn-outline-light ms-4 me-2">
+                        <a class="nav-link px-2" href="{{root_domain}}/api/v1/ui" target="_blank">Live Docs</a>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-light me-2">
+                        <a class="nav-link px-2" href="{{root_domain}}" target="_blank">Tradepally</a>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-light me-2">
+                        <a class="nav-link px-2" href="https://x.com/traderstechie" target="_blank">Me On X</a>
+                    </button>
+                </div>
             </div>
         </header>
     </div>
@@ -72,7 +99,17 @@
         {% endblock %}
     </main>
 
-    <footer>
+    <footer class="container">
+        <div class="text-center py-2 mb-3">
+            <strong>
+                <em>THANK YOU FOR CHECKING THIS OUT! FIND ME ON X:
+                    <button type="button" class="btn btn-outline-light">
+                        <a href="https://x.com/traderstechie" target="_blank"
+                            class="text-dark text-decoration-none"><b>@tradersTechie</b></a>
+                    </button>
+                </em>
+            </strong>
+        </div>
     </footer>
 
     <!-- JavaScript -->

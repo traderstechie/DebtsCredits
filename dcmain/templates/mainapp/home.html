@@ -7,7 +7,7 @@
         {# The
         module is used to keep simple but detailed and dynamic record of debtors and creditors for individual, business,
         or organisation.#} I recently exposed the module for use in another project via an API and decided to put up a
-        glympse here. The module's full functionality includes more indebt operations, like linking debtor to creditor
+        glympse here. The module's full functionality includes more indebt operations, like: linking debtor to creditor
         and vice versa, and linking either to other users on the platform who can assent to txns meant for them, thereby
         adding a layer of legitimacy, among other features. The complete code for
         this project is at <a href="https://github.com/traderstechie/DebtsCredits" target="_blank"
@@ -16,7 +16,7 @@
     <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
         <div class="col d-flex align-items-start">
             <div class="content-section bg-secondary text-white container-fluid">
-                <h3>Featured Profile</h3>
+                <h3 class="text-dark p-1">Featured Profile</h3>
                 <table class="table-responsive">
                     <thead>
                         <tr>
@@ -70,7 +70,7 @@
         </div>
         <div class="col d-flex align-items-start">
             <div class="content-section bg-secondary text-white container-fluid">
-                <h3>Debtors & Creditors</h3>
+                <h3 class="text-dark p-1">Debtors & Creditors</h3>
                 <p>
                     All the items displayed via the <strong>Debtors</strong> and
                     <strong>Creditors</strong> buttons below were added using the API for
@@ -103,7 +103,7 @@
                                     <th>Created Via</th>
                                 </thead>
                                 <tbody>
-                                    {% for deb in dcp_data[lcl.debtors] %}
+                                    {% for deb in reversed(dcp_data[lcl.debtors]) %}
                                     <tr class="no-nth-bg">
                                         <td>{{ deb[lcl.name] }}</td>
                                         <td>{{ deb[lcl.id] }}</td>
@@ -135,7 +135,7 @@
                                     <th>Created Via</th>
                                 </thead>
                                 <tbody>
-                                    {% for cred in dcp_data[lcl.creditors] %}
+                                    {% for cred in reversed(dcp_data[lcl.creditors]) %}
                                     <tr class="no-nth-bg">
                                         <td>{{ cred[lcl.name] }}</td>
                                         <td>{{ cred[lcl.id] }}</td>
@@ -229,7 +229,7 @@
         </div>
         <div class="col d-flex align-items-start">
             <div class="content-section bg-secondary text-white container-fluid">
-                <h3>Transactions</h3>
+                <h3 class="text-dark p-1">Transactions</h3>
                 <p>
                     There can be <strong>Debt, Credit, Debt Payment, and Credit Payment transactions</strong>. A debt
                     txn represents money you received from a creditor and credit txn represents money you gave to a
@@ -257,7 +257,7 @@
                                     <th></th>
                                 </thead>
                                 <tbody>
-                                    {% for dc_tr in dcp_data[lcl.transactions] %}
+                                    {% for dc_tr in reversed(dcp_data[lcl.transactions]) %}
                                     <tr class="no-nth-bg">
                                         <td>{{ datetime.fromisoformat(dc_tr[lcl.transaction_date]).strftime('%d/%b/%Y')
                                             }}</td>
@@ -283,11 +283,11 @@
                             class="content-section-mini">
                             <!-- Hidden Inputs -->
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="dc_profile_id" value="{{dcp_data[lcl.id]}}">
+                            <input type="hidden" name="{{lcl.dc_profile_id}}" value="{{dcp_data[lcl.id]}}">
                             <!-- User Inputs -->
                             <div>
                                 <label for="">Date <small>(Optional)</small></label>
-                                <input type="date" name="transaction_date" class="form-control">
+                                <input type="datetime-local" name="transaction_date" class="form-control">
                                 <br>
                             </div>
                             <div>

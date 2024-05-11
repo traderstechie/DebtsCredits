@@ -50,7 +50,7 @@ def home():
 
     return render_template("mainapp/home.html", dcp_data=dcp_data.json() or dummy_dcp_data,
                            title="Home", user_password=d[lcl.password], user_pin=d[lcl.pin],
-                           root_domain=ess[lcl.root_domain])
+                           root_domain=ess[lcl.root_domain], reversed=reversed)
 
 
 @mainapp.route("/mainapp/create-debtor-creditor/", methods=['GET', 'POST'])
