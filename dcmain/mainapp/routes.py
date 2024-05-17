@@ -48,9 +48,13 @@ def home():
         }
     }
 
+    def sorted_txns(l):
+        return sorted(l, key=lambda a: a[lcl.datetime_posted], reverse=True)
+
     return render_template("mainapp/home.html", dcp_data=dcp_data.json() or dummy_dcp_data,
                            title="Home", user_password=d[lcl.password], user_pin=d[lcl.pin],
-                           root_domain=ess[lcl.root_domain], reversed=reversed)
+                           root_domain=ess[lcl.root_domain], reversed=reversed,
+                           sorted_txns=sorted_txns)
 
 
 @mainapp.route("/mainapp/create-debtor-creditor/", methods=['GET', 'POST'])

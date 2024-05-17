@@ -2,8 +2,10 @@
 
 Tradepally Debts Credits API Usage Example
 
-This illustrates minimal usage of a Debts & Credits Recording module, which is part of my larger bookkeeping app, Tradepally.com.
+This illustrates minimal usage of a Debts & Credits Recording module, which is part of my larger bookkeeping app [in a private repo], https://Tradepally.com.
 
-I recently exposed the module for use in another private project via an API and decided to put up a glympse here.
+I recently exposed the Simple Debts Credits module for use in another private project via an API and decided to put up a glympse here.
 
-The module's full functionality includes more indebt operations, like: linking debtor to creditor and vice versa, and linking either of them to other users on the platform who can assent to txns meant for them - thereby adding a layer of legitimacy, among other features.
+The module's full functionality includes more indebt operations, like: linking debtor to creditor and vice versa, and linking either of them to other users on the platform, who can then assent to txns meant for them - thereby adding a layer of legitimacy, among other features.
+
+NOTE: I'm doing "one-line-of-code PER chance" while attending to customers at my informal financial services SME, so I'll soon add automated test!!!

@@ -64,6 +64,7 @@ class lcl:
     current_book_balance = "current_book_balance"
     debtor_dc_profile_id = "debtor_dc_profile_id"
     creditor_dc_profile_id = "creditor_dc_profile_id"
+    total_transactions_worth = "total_transactions_worth"
     payables_and_receivables_d = "payables_and_receivables_d"
     transaction_mode_for_display = "transaction_mode_for_display"
 
