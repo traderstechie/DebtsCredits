@@ -92,13 +92,10 @@ def is_intent_str(s):
 
 
 # ccl DICT
-# ccl_dict = {k_n_v[0]: k_n_v[1] for k_n_v in all_carmel_conforming_strings}
 ccl_dict = {k: v for k, v in ccl.__dict__.items() if is_intent_str(k)}
 
 # lcl DICT
-# lcl_dict = {k_n_v[0]: k_n_v[1] for k_n_v in all_lower_case_strings}
 lcl_dict = {k: v for k, v in lcl.__dict__.items() if is_intent_str(k)}
 
 # ucl DICT
-# ucl_dict = {k_n_v[0]: k_n_v[1] for k_n_v in all_upper_case_strings}
 ucl_dict = {k: v for k, v in ucl.__dict__.items() if is_intent_str(k)}

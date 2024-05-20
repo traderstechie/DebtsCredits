@@ -40,13 +40,6 @@
         <header
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <!-- Main title/logo inside header -->
-            <!-- <div class="col-md-4 text-start left-nav">
-                <button type="button" class="btn align-items-center mb-2 ms-2">
-                    <a href="{{ url_for('mainapp.home') }}" class="text-white text-decoration-none">
-                        <strong>TRADEPALLY DEBTS CREDITS API USAGE</strong>
-                    </a>
-                </button>
-            </div> -->
             <div class="col-md-4 text-start left-nav">
                 <button type="button" class="btn align-items-center m-2 ms-2">
                     <a href="{{ url_for('mainapp.home') }}" class="text-white text-decoration-none">
@@ -56,17 +49,6 @@
             </div>
 
             <!-- Main navigations inside header -->
-            <!-- <div class="col-md-4 text-end right-nav">
-                <button type="button" class="btn btn-sm btn-outline-light me-2">
-                    <a class="nav-link px-2" href="{{root_domain}}/api/v1/ui" target="_blank">Live Docs</a>
-                </button>
-                <button type="button" class="btn btn-sm btn-outline-light me-2">
-                    <a class="nav-link px-2" href="{{root_domain}}" target="_blank">Tradepally</a>
-                </button>
-                <button type="button" class="btn btn-sm btn-outline-light me-4">
-                    <a class="nav-link px-2" href="https://x.com/traderstechie" target="_blank">Me On X</a>
-                </button>
-            </div> -->
             <div class="col-md-4 text-end right-nav">
                 <div class="me-2">
                     <button type="button" class="btn btn-sm btn-outline-light ms-3 me-2">
@@ -99,18 +81,20 @@
         {% endblock %}
     </main>
 
-    <footer class="container">
-        <div class="text-center py-3 mb-2">
-            <strong>
-                <em>THANK YOU FOR CHECKING THIS OUT! FIND ME ON X:
-                    <button type="button" class="btn btn-outline-light">
-                        <a href="https://x.com/traderstechie" target="_blank"
-                            class="text-dark text-decoration-none"><b>@tradersTechie</b></a>
-                    </button>
-                </em>
-            </strong>
-        </div>
-    </footer>
+    <div class="container">
+        <footer class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+            <div class="text-center py-3 mb-2">
+                <strong>
+                    <em>THANK YOU FOR CHECKING THIS OUT! FIND ME ON X:
+                        <button type="button" class="btn btn-outline-light">
+                            <a href="https://x.com/traderstechie" target="_blank"
+                                class="text-dark text-decoration-none"><b>@tradersTechie</b></a>
+                        </button>
+                    </em>
+                </strong>
+            </div>
+        </footer>
+    </div>
 
     <!-- JavaScript -->
     <!-- JQuery first, then Bootstrap JS bundle (Popper included) -->
