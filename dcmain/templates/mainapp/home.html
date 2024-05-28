@@ -14,7 +14,7 @@
     <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
         <div class="col d-flex align-items-start">
             <div class="content-section bg-secondary text-white container-fluid">
-                <h3 class="text-dark p-1">Featured Profile</h3>
+                <h4 class="text-dark p-1">Featured Profile</h4>
                 <em class="text-muted p-1">ID: {{ dcp_data[lcl.id] }}</em> <br> <br>
                 <table class="table-responsive">
                     <thead>
@@ -79,7 +79,7 @@
         </div>
         <div class="col d-flex align-items-start">
             <div class="content-section bg-secondary text-white container-fluid">
-                <h3 class="text-dark p-1">Debtors & Creditors</h3>
+                <h4 class="text-dark p-1">Debtors & Creditors</h4>
                 <p>
                     All the items displayed via the <strong>Debtors</strong> and
                     <strong>Creditors</strong> buttons below were added using the API for
@@ -120,7 +120,8 @@
                                         <td>{{ utils.two_decimals(deb[lcl.total_debts]) }}</td>
                                         <td>{{ utils.two_decimals(deb[lcl.total_payments]) }}</td>
                                         <td>{{ utils.two_decimals(deb[lcl.current_book_balance]) }}</td>
-                                        <td>{{ datetime.fromisoformat(deb[lcl.created_on]).strftime('%a, %d-%b-%Y') }}
+                                        <td>{{ datetime.fromisoformat(deb[lcl.created_on]).strftime('%a, %d-%b-%Y')
+                                            }}
                                         </td>
                                         <td>{{ deb[lcl.created_via] }}</td>
                                     </tr>
@@ -152,7 +153,8 @@
                                         <td>{{ utils.two_decimals(cred[lcl.total_credits]) }}</td>
                                         <td>{{ utils.two_decimals(cred[lcl.total_payments]) }}</td>
                                         <td>{{ utils.two_decimals(cred[lcl.current_book_balance]) }}</td>
-                                        <td>{{ datetime.fromisoformat(cred[lcl.created_on]).strftime('%a, %d-%b-%Y') }}
+                                        <td>{{ datetime.fromisoformat(cred[lcl.created_on]).strftime('%a, %d-%b-%Y')
+                                            }}
                                         </td>
                                         <td>{{ cred[lcl.created_via] }}</td>
                                     </tr>
@@ -238,7 +240,7 @@
         </div>
         <div class="col d-flex align-items-start">
             <div class="content-section bg-secondary text-white container-fluid">
-                <h3 class="text-dark p-1">Transactions</h3>
+                <h4 class="text-dark p-1">Transactions</h4>
                 <p>
                     There can be <strong>Debt, Credit, Debt Payment, and Credit Payment transactions</strong>. A debt
                     txn represents money you received from a creditor and credit txn represents money you gave to a

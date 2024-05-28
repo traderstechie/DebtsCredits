@@ -38,11 +38,11 @@
 <body>
     <div class="container">
         <header
-            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-secondary">
             <!-- Main title/logo inside header -->
             <div class="col-md-4 text-start left-nav">
-                <button type="button" class="btn align-items-center m-2 ms-2">
-                    <a href="{{ url_for('mainapp.home') }}" class="text-white text-decoration-none">
+                <button type="button" class="btn btn-outline-secondary align-items-center m-2 ms-2">
+                    <a href="{{ url_for('mainapp.home') }}" class="text-dark text-decoration-none">
                         <strong>TRADEPALLY DEBTS CREDITS API USAGE</strong>
                     </a>
                 </button>
@@ -51,14 +51,16 @@
             <!-- Main navigations inside header -->
             <div class="col-md-4 text-end right-nav">
                 <div class="me-2">
-                    <button type="button" class="btn btn-sm btn-outline-light ms-3 me-2">
-                        <a class="nav-link px-2" href="{{root_domain}}/api/v1/ui" target="_blank">Live Docs</a>
+                    <button type="button" class="btn btn-sm ms-3 me-2">
+                        <a class="nav-link text-dark px-2" href="{{root_domain}}/api/v1/ui" target="_blank">Live
+                            Docs</a>
                     </button>
-                    <button type="button" class="btn btn-sm btn-outline-light me-2">
-                        <a class="nav-link px-2" href="{{root_domain}}" target="_blank">Tradepally</a>
+                    <button type="button" class="btn btn-sm me-2">
+                        <a class="nav-link text-dark px-2" href="{{root_domain}}" target="_blank">Tradepally</a>
                     </button>
-                    <button type="button" class="btn btn-sm btn-outline-light me-2">
-                        <a class="nav-link px-2" href="https://x.com/traderstechie" target="_blank">Me On X</a>
+                    <button type="button" class="btn btn-sm me-2">
+                        <a class="nav-link text-dark px-2" href="https://x.com/traderstechie" target="_blank">Me On
+                            X</a>
                     </button>
                 </div>
             </div>
@@ -86,10 +88,8 @@
             <div class="text-center py-3 mb-2">
                 <strong>
                     <em>THANK YOU FOR CHECKING THIS OUT! FIND ME ON X:
-                        <button type="button" class="btn btn-outline-light">
-                            <a href="https://x.com/traderstechie" target="_blank"
-                                class="text-dark text-decoration-none"><b>@tradersTechie</b></a>
-                        </button>
+                        <a href="https://x.com/traderstechie" target="_blank"
+                            class="text-dark text-decoration-none"><b>@TradersTechie</b></a>
                     </em>
                 </strong>
             </div>
