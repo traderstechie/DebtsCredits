@@ -14,7 +14,7 @@
     <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
         <div class="col d-flex align-items-start">
             <div class="content-section bg-secondary text-white container-fluid">
-                <h4 class="text-dark p-1">Featured Profile</h4>
+                <h4 class="text-dark p-1">Example Profile</h4>
                 <em class="text-muted p-1">ID: {{ dcp_data[lcl.id] }}</em> <br> <br>
                 <table class="table-responsive">
                     <thead>
@@ -30,12 +30,6 @@
                             <td>Name</td>
                             <td><strong>{{ dcp_data[lcl.name] }}</strong></td>
                         </tr>
-                        {#
-                        <tr>
-                            <td>ID</td>
-                            <td><small>{{ dcp_data[lcl.id] }}</small></td>
-                        </tr>
-                        #}
                         <tr>
                             <td>Currency</td>
                             <td><strong>{{ curr[lcl.name] }} ({{ curr[lcl.symbol] }})</strong></td>
@@ -81,10 +75,13 @@
             <div class="content-section bg-secondary text-white container-fluid">
                 <h4 class="text-dark p-1">Debtors & Creditors</h4>
                 <p>
-                    All the items displayed via the <strong>Debtors</strong> and
-                    <strong>Creditors</strong> buttons below were added using the API for
-                    the featured profile. You can add new ones via the <strong>Add Debtor</strong>
-                    or <strong>Add Creditor</strong> buttons to test it for yourself.
+                    All the items displayed via the Debtors and
+                    Creditors buttons below were added using the API - for
+                    the example profile.
+                </p>
+                <p>
+                    You can add new ones via the Add Debtor
+                    and Add Creditor buttons to test it for yourself.
                     <br> <br>
                 </p>
                 <div class="container text-center">
@@ -242,10 +239,14 @@
             <div class="content-section bg-secondary text-white container-fluid">
                 <h4 class="text-dark p-1">Transactions</h4>
                 <p>
-                    There can be <strong>Debt, Credit, Debt Payment, and Credit Payment transactions</strong>. A debt
-                    txn represents money you received from a creditor and credit txn represents money you gave to a
-                    debtor. And on the flip side, a debt payment txn reps payment you made to a creditor and credit
-                    payment reps money a debtor paid to you.
+                    There can be Debt, Credit, Debt Payment, and Credit Payment transactions. A debt
+                    txn represents money you receive from a creditor and credit txn represents money you
+                    give to a debtor.
+                </p>
+                <p>
+                    And on the flip side, a debt payment txn reps payment you make to a creditor and credit
+                    payment reps payment a debtor makes to you.
+                    <br> <br>
                 </p>
                 <div class="container text-center">
                     <a type="button" class="btn btn-sm btn-outline-light m-1 moreOptionAnchor"
