@@ -1,6 +1,6 @@
 # DebtsCredits
 
-Tradepally Debts Credits API Usage Example || Deployed to https://debtscredits.onrender.com
+Tradepally Debts Credits API Usage Example || Deployed to https://debtcredit.onrender.com
 
 This illustrates minimal usage of a Debts & Credits Recording module, which is part of my larger bookkeeping app [in a private repo], https://Tradepally.com.
 
