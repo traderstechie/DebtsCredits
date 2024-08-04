@@ -11,6 +11,12 @@
         this project is at <a href="https://github.com/traderstechie/DebtsCredits" target="_blank"
             class="text-decoration-none"><em>This GitHub Repo</em></a>.
     </p>
+    {% if is_error %}
+    <div class="content-section text-danger">
+        <h6>Oops! There's an error!</h6>
+        <h5><strong><em>Message:</em> {{ dcp_data[lcl.message] }}</strong></h5>
+    </div>
+    {% else %}
     <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
         <div class="col d-flex align-items-start">
             <div class="content-section bg-secondary text-white container-fluid">
@@ -359,6 +365,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 <script>
     var home_page = true;

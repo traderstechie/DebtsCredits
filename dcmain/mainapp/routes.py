@@ -21,39 +21,32 @@ def home():
 
     d = ess[lcl.params]
 
-    dcp_data = requests.get(
-        "{0}/api/v1/debts-credits/dc-profile/{1}/{2}/{3}/".format(
-            ess[lcl.root_domain], d[lcl.user_id], d[lcl.password], d[lcl.dc_profile_id]
-        ),
-        headers=auth_header,
-        timeout=1200,
-    )
+    resp_d = None
 
-    dummy_dcp_data = {
-        lcl.created_on: datetime.now(),
-        lcl.timezone: "Africa/Lagos",
-        lcl.created_via: ucl.API,
-        lcl.id: "6477DCP68999",
-        lcl.name: "DCP One",
-        lcl.num_of_debtors: 5,
-        lcl.num_of_creditors: 6,
-        lcl.payables_and_receivables_d: {
-            lcl.total_payables: 2000000,
-            lcl.total_receivables: 1250000
-        },
-        lcl.primary_currency_d: {
-            lcl.name: "Nigerian Naira",
-            lcl.code: "566",
-            lcl.symbol: "₦",
-        }
-    }
+    try:
+        dcp_data = requests.get(
+            "{0}/api/v1/debts-credits/dc-profile/{1}/{2}/{3}/".format(
+                ess[lcl.root_domain], d[lcl.user_id], d[lcl.password], d[lcl.dc_profile_id]
+            ),
+            headers=auth_header,
+            timeout=1200,
+        )
+
+        resp_d = dcp_data.json()
+
+    except Exception as e:
+        pass
+
+    if not isinstance(resp_d, dict):
+        resp_d = {lcl.error: True, lcl.message: 'Something went wrong.'}
 
     def sorted_txns(l):
         return sorted(l, key=lambda a: a[lcl.datetime_posted], reverse=True)
 
-    return render_template("mainapp/home.html", dcp_data=dcp_data.json() or dummy_dcp_data,
+    return render_template("mainapp/home.html", dcp_data=resp_d or mu.dummy_dcp_data,
                            title="Home", user_password=d[lcl.password], user_pin=d[lcl.pin],
                            root_domain=ess[lcl.root_domain], reversed=reversed,
+                           is_error=(not resp_d.get(lcl.primary_currency_d)),
                            sorted_txns=sorted_txns)
 
 
@@ -94,16 +87,11 @@ def create_debtor_or_creditor():
         json=params,
     )
 
-    # print(params)
-    # print(req_res)
-
     try:
         res_d = req_res.json() or json.loads(req_res.text)
     except ValueError:
         flash("Invalid/empty response received!", 'warning')
         return redirect(url_for('mainapp.home'))
-
-    # print(res_d)
 
     if res_d.get(lcl.name) == name:
         # Success
@@ -160,16 +148,11 @@ def create_debts_credits_transaction():
         json=params,
     )
 
-    # print(params)
-    # print(req_res)
-
     try:
         res_d = req_res.json() or json.loads(req_res.text)
     except ValueError:
         flash("Invalid/empty response received!", 'warning')
         return redirect(url_for('mainapp.home'))
-
-    # print(res_d)
 
     if mu.is_valid_numeric(res_d.get(lcl.amount)) \
             and Decimal(res_d.get(lcl.amount)) == Decimal(amount or '0'):

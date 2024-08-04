@@ -1,6 +1,6 @@
 import os
 from decimal import Decimal
-
+from datetime import datetime
 from flask import current_app
 
 from dcmain.config import Config
@@ -74,8 +74,6 @@ def format_decimal(value, places=2, currency_symbol=None, no_grouping=False, rd=
 
 def two_decimals(value, currency_symbol=None, rd=False):
     """See `format_decimal` function for modalities"""
-    # if isinstance(value, str):
-    #     value = Decimal(value)
     return format_decimal(value, places=2, currency_symbol=currency_symbol, rd=rd)
 
 
@@ -116,3 +114,23 @@ def get_route_essentials(headers: dict = None):
         lcl.headers: headers,
         lcl.root_domain: root_domain
     }
+
+
+dummy_dcp_data = {
+    lcl.created_on: datetime.now(),
+    lcl.timezone: "Africa/Lagos",
+    lcl.created_via: ucl.API,
+    lcl.id: "6477DCP68999",
+    lcl.name: "DCP One",
+    lcl.num_of_debtors: 5,
+    lcl.num_of_creditors: 6,
+    lcl.payables_and_receivables_d: {
+        lcl.total_payables: 2000000,
+        lcl.total_receivables: 1250000
+    },
+    lcl.primary_currency_d: {
+        lcl.name: "Nigerian Naira",
+        lcl.code: "566",
+        lcl.symbol: "₦",
+    }
+}
